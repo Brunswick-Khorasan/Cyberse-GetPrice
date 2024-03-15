@@ -1,4 +1,4 @@
-# Get a list of all Cyberse monsters
+# Get a list of all Cyberse monsters & outputs to cyberse_list.txt
 # Written by Petra Lynn Vanderhei (mvanderhei2@huskers.unl.edu)
 #
 # Yugipedia's API and documentation is at https://yugipedia.com/api.php?action=help
@@ -21,11 +21,9 @@ json_list = json.loads(response.content)['query']['results']
 # Clear the file
 open('cyberse_list.txt','w').close()
 
-cyberse_list = open('cyberse_list.txt', mode='a',encoding='utf8')
+with open('cyberse_list.txt', mode='a',encoding='utf8') as cyberse_list:
+    for key in json_list:
+        name = json_list[key]['fulltext']
+        #print(name)
+        cyberse_list.write(name+'\n')
 
-for key in json_list:
-    name = json_list[key]['fulltext']
-    print(name)
-    cyberse_list.write(name+'\n')
-
-cyberse_list.close()
