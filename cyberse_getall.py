@@ -16,10 +16,16 @@ headers = {'User-Agent': 'Cyberse-GetPriceBot/0.1 (https://github.com/Brunswick-
 
 response = requests.get(url_yugipedia, params=query_yugipedia, headers=headers)
 
-json_list = json.loads(response.content)['query']['reuslts']
+json_list = json.loads(response.content)['query']['results']
 
-string_list = ''
+# Clear the file
+open('cyberse_list.txt','w').close()
+
+cyberse_list = open('cyberse_list.txt', mode='a',encoding='utf8')
 
 for key in json_list:
     name = json_list[key]['fulltext']
-    string_list += name + '\n'
+    print(name)
+    cyberse_list.write(name+'\n')
+
+cyberse_list.close()
